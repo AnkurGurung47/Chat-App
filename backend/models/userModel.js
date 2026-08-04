@@ -5,6 +5,13 @@ const userModel = new mongoose.Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true,
+    trim: true,
+  },
   username: {
     type: String,
     required: true,
@@ -20,8 +27,8 @@ const userModel = new mongoose.Schema({
   },
   gender: {
     type: String,
-    required: true,
-    enum: ['male', 'female'],
+    default: 'not specified',
+    enum: ['male', 'female', 'not specified'],
   },
 })
 export const User = mongoose.model('User', userModel)

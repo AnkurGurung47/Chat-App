@@ -9,7 +9,7 @@ export const isAuthenticated = async (req, res, next) => {
     if (!decode) {
       return res.status(401).json({ message: 'Invalid token' })
     }
-    console.log(decode)
+
     req.id = decode.userId
     next()
   } catch (error) {

@@ -5,8 +5,9 @@ import jwt from 'jsonwebtoken'
 //registering user
 export const register = async (req, res) => {
   try {
-    const { fullName, username, password, confirmPassword, gender } = req.body
-    if (!fullName || !username || !password || !confirmPassword || !gender) {
+    const { fullName, username, password, confirmPassword, gender, email } =
+      req.body
+    if (!fullName || !username || !password || !confirmPassword || !email) {
       return res.status(400).json({ message: 'All fields are required' })
     }
     if (password != confirmPassword) {
@@ -26,8 +27,9 @@ export const register = async (req, res) => {
       fullName,
       username,
       password: hashedPassword,
-      profilePhoto: gender === 'male' ? boyAvatar : girlAvatar,
+      profilePhoto: gender === 'girl' ? girlAvatar : boyAvatar,
       gender,
+      email,
     })
     return res.status(201).json({
       message: 'account created successfully',
@@ -42,12 +44,12 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { username, password } = req.body
-    if (!username || !password) {
+    const { email, password } = req.body
+    if (!email || !password) {
       return res.status(400).json({ message: 'All Fields required' })
     }
 
-    const user = await User.findOne({ username })
+    const user = await User.findOne({ email })
     if (!user) {
       return res.status(400).json({
         message: 'User not found',
@@ -80,7 +82,7 @@ export const login = async (req, res) => {
       })
       .json({
         _id: user._id,
-        username: user.username,
+        email: user.email,
         fullname: user.fullName,
         profilePhoto: user.profilePhoto,
       })
