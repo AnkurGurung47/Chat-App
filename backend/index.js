@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 5000
 //cors
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://chat-app-vmx9.onrender.com',
     credentials: true,
   }),
 )

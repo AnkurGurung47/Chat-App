@@ -10,7 +10,9 @@ function useGetOtherUsers() {
       try {
         axios.defaults.withCredentials = true
 
-        const res = await axios.get('http://localhost:8080/api/v1/user/')
+        const res = await axios.get(
+          'https://chat-app-vmx9.onrender.com/api/v1/user/',
+        )
 
         //store
         dispatch(setAllUsers(res.data))

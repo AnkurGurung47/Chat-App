@@ -13,7 +13,7 @@ function useGetMessages() {
       try {
         axios.defaults.withCredentials = true
         const res = await axios.get(
-          `http://localhost:8080/api/v1/message/${selectedUser?._id}`,
+          `https://chat-app-vmx9.onrender.com/api/v1/message/${selectedUser?._id}`,
         )
         console.log(res)
         dispatch(setConversation(res.data))
