@@ -6,6 +6,8 @@ import toast from 'react-hot-toast'
 
 function Register() {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+
   const [user, setUser] = useState({
     email: '',
     fullName: '',
@@ -21,6 +23,7 @@ function Register() {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
     if (user.password !== user.confirmPassword) {
       return toast.error('Passwords do not match')
     }
@@ -42,6 +45,8 @@ function Register() {
       }
     } catch (error) {
       console.log(error.response?.data)
+    } finally {
+      setLoading(false)
     }
   }
   return (
@@ -132,10 +137,11 @@ function Register() {
           </div>
           <div className="pt-6">
             <button
+              disabled={loading}
               type="submit"
               className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
             >
-              Sign Up
+              {loading ? 'Signing up...' : 'Sign up'}
             </button>
           </div>
           <div className="pt-3 text-center text-sm">
