@@ -139,7 +139,11 @@ function Register() {
             <button
               disabled={loading}
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+              className={`w-full py-2 rounded-lg transition ${
+                loading
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-blue-500 hover:bg-blue-600 text-white'
+              }`}
             >
               {loading ? 'Signing up...' : 'Sign up'}
             </button>
